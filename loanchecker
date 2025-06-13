@@ -1,3 +1,5 @@
+// Set the minimum income and credit score requirements for each type of loan
+
 const minIncomeForDuplex = 60000;
 const minCreditScoreForDuplex = 700;
 
@@ -7,22 +9,40 @@ const minCreditScoreForCondo = 680;
 const minIncomeForCar = 30000;
 const minCreditScoreForCar = 650;
 
+// This function checks what type of loan a person qualifies for
 function getLoanMessage(annualIncome, creditScore) {
-  if(creditScore >= minCreditScoreForDuplex && annualIncome >= minIncomeForDuplex) {
-    return "You qualify for a duplex, condo, and car loan."
-  } else if (annualIncome >= minIncomeForCondo && creditScore >= minCreditScoreForCondo) {
-    return "You qualify for a condo and car loan."
-  } else if (annualIncome >= minIncomeForCar && creditScore >= minCreditScoreForCar) {
-    return "You qualify for a car loan."
-  } else {
-    return "You don't qualify for any loans."
+  // Check if the person qualifies for a duplex loan (which includes condo and car)
+  if (creditScore >= minCreditScoreForDuplex && annualIncome >= minIncomeForDuplex) {
+    return "You qualify for a duplex, condo, and car loan.";
+  } 
+  // Check if the person qualifies for a condo loan (which includes car)
+  else if (annualIncome >= minIncomeForCondo && creditScore >= minCreditScoreForCondo) {
+    return "You qualify for a condo and car loan.";
+  } 
+  // Check if the person qualifies for a car loan only
+  else if (annualIncome >= minIncomeForCar && creditScore >= minCreditScoreForCar) {
+    return "You qualify for a car loan.";
+  } 
+  // If none of the above, the person doesn't qualify for any loan
+  else {
+    return "You don't qualify for any loans.";
   }
 }
+
+// Example test cases
+
+// Person qualifies for all loans
 const duplexLoanMsg = getLoanMessage(85000, 850);
-console.log(duplexLoanMsg);
+console.log(duplexLoanMsg); // Output: You qualify for a duplex, condo, and car loan.
+
+// Person qualifies for condo and car loans
 const condoLoanMsg = getLoanMessage(65000, 690);
-console.log(condoLoanMsg);
+console.log(condoLoanMsg); // Output: You qualify for a condo and car loan.
+
+// Person qualifies for car loan only
 const carLoanMsg = getLoanMessage(45000, 660);
-console.log(carLoanMsg);
-const noLoanMsg = getLoanMessage(25000,550);
-console.log(noLoanMsg);
+console.log(carLoanMsg); // Output: You qualify for a car loan.
+
+// Person does not qualify for any loans
+const noLoanMsg = getLoanMessage(25000, 550);
+console.log(noLoanMsg); // Output: You don't qualify for any loans.
